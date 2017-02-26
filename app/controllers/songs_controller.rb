@@ -5,18 +5,23 @@ class SongsController < ApplicationController
     @song = Song.new
   end
 
-  def create
-    @song = Song.new(song_params)
-    fetcher = Lyricfy::Fetcher.new
-    @lyrics = fetcher.search("#{@song.artist}", "#{@song.title}")
-    @lyrics = @lyrics.body("<br>")
-    @song.lyrics = @lyrics
-    if @song.save
-      redirect_to edit_song_path(@song)
-    else
-      render :new, :status => :unprocessable_entity
-    end
-  end
+	def create
+		@song = Song.new(song_params)
+		fetcher = Lyricfy::Fetcher.new
+		begin
+			@lyrics = fetcher.search("#{@song.artist}", "#{@song.title}")
+			@lyrics = @lyrics.body("<br>")
+			@song.lyrics = @lyrics
+			if @song.save
+				redirect_to edit_song_path(@song)
+			else
+				render :new, :status => :unprocessable_entity
+			end
+		rescue
+			flash.now[:error] = "Song not found"
+			render :new
+		end
+	end
 
   def index
     @songs = Song.all

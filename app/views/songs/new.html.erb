@@ -1,7 +1,14 @@
-<div class="post-box col-xs-10 col-xs-offset-1">
-  <%= simple_form_for @song do |f| %>
-    <%= f.input :artist %>
-    <%= f.input :title %>
-    <%= f.submit class: 'btn btn-primary' %>
+  <% if flash[:error] %>
+    <div class="error"><%= flash.now[:error] %></div>
   <% end %>
+
+<div class="post-box col-xs-10 col-xs-offset-1">
+	<%= simple_form_for @song do |f| %>
+		<%= f.input :artist %>
+		<%= f.input :title %>
+		<%= f.submit class: 'btn btn-primary' %>
+		<% if @song.errors.any? %>
+			<% redirect_to new_song_path %>
+		<% end %>
+	<% end %>
 </div>

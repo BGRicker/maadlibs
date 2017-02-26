@@ -46,4 +46,8 @@ module Lyricfy
       end
     end
   end
+
+  def method_missing?
+    true
+  end
 end
