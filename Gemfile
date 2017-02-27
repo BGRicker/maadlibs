@@ -20,6 +20,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'lyricfy'
 gem "figaro"
 gem 'simple_form', github: 'kesha-antonov/simple_form', branch: 'rails-5-0'
+gem 'bootstrap-sass', '>= 3.3.6'
 
 group :development, :test do
   gem 'byebug', platform: :mri
