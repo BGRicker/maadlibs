@@ -1,14 +1,74 @@
-  <% if flash[:error] %>
-    <div class="error"><%= flash.now[:error] %></div>
+<!DOCTYPE html>
+<html lang="en">
+
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="intro-text">
+                    <span class="name">MAAD Libs</span>
+                    <span class="skills">Mad Libs with Songs of Your Choice to Replace Swears</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+<%= simple_form_for @song do |f| %>
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Enter Your Song</h2>
+                    <hr class="star-primary">
+                    <% if flash[:error] %>
+                      <h4><div class="error"><%= flash.now[:error] %></div></h4>
+                    <% end %>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <form name="sentMessage" id="contactForm" novalidate>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Artist</label>
+                                <%= f.input :artist, input_html: { type: 'text', class: "form-control", placeholder: "Artist", id: "name" } %>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Song Title</label>
+                                <%= f.input :title, input_html: { type: 'text', class: "form-control", placeholder: "Song Title", id: "name" } %>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <br>
+                        <div id="success"></div>
+                        <div class="row">
+                            <div class="form-group col-xs-12">
+                                <%= f.submit class: 'btn btn-success btn-lg' %>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <% if @song.errors.any? %>
+      <% redirect_to new_song_path %>
+      <% end %>
   <% end %>
 
-<div class="post-box col-xs-10 col-xs-offset-1">
-	<%= simple_form_for @song do |f| %>
-		<%= f.input :artist %>
-		<%= f.input :title %>
-		<%= f.submit class: 'btn btn-primary' %>
-		<% if @song.errors.any? %>
-			<% redirect_to new_song_path %>
-		<% end %>
-	<% end %>
-</div>
+    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+    <div class="scroll-top page-scroll hidden-sm hidden-xs hidden-lg hidden-md">
+        <a class="btn btn-primary" href="#page-top">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+    </div>
+
+    </body>
+
+</html>

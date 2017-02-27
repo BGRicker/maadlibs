@@ -24,7 +24,7 @@ class SongsController < ApplicationController
 	end
 
   def index
-    @songs = Song.all
+		redirect_to root_path
   end
 
   def show
