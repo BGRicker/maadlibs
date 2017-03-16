@@ -37,6 +37,9 @@ class SongsController < ApplicationController
 
   def edit
     @song = Song.find(params[:id])
+    if @song.nouns.present?
+      redirect_to @song
+    end
   end
 
   def update
