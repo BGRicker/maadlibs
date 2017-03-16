@@ -1,24 +1,17 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+![](https://media.giphy.com/media/8NOgarvLRo9Ne/giphy.gif)
 
-Things you may want to cover:
+Happies:
 
-* Ruby version
+* pull up a song, swaps out bad words with an array of words you choose
+* hosted on www.maadlibs.com
 
-* System dependencies
+Sads:
 
-* Configuration
+* nothing to set up multiple words: "Guy Fieri" ends up as ["Guy", "Fieri"]
+* maybe need a better way to hide urls, you can add any /number and get
+  someone's song
+* no tests, yolo
+* might be some goofed up indentation after using some of a bootstrap template
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
