@@ -1,30 +1,30 @@
 class SongsController < ApplicationController
   skip_before_action :verify_authenticity_token
-  
+
   def new
     @song = Song.new
   end
 
-	def create
-		@song = Song.new(song_params)
-		fetcher = Lyricfy::Fetcher.new
-		begin
-			@lyrics = fetcher.search("#{@song.artist}", "#{@song.title}")
-			@lyrics = @lyrics.body("<br>")
-			@song.lyrics = @lyrics
-			if @song.save
-				redirect_to edit_song_path(@song)
-			else
-				render :new, :status => :unprocessable_entity
-			end
-		rescue
-			flash.now[:error] = "Song not found"
-			render :new
-		end
-	end
+  def create
+    @song = Song.new(song_params)
+    fetcher = Lyricfy::Fetcher.new
+    begin
+      @lyrics = fetcher.search("#{@song.artist}", "#{@song.title}")
+      @lyrics = @lyrics.body("<br>")
+      @song.lyrics = @lyrics
+      if @song.save
+        redirect_to edit_song_path(@song)
+      else
+        render :new, :status => :unprocessable_entity
+      end
+    rescue
+      flash.now[:error] = "Song not found"
+      render :new
+    end
+  end
 
   def index
-		redirect_to root_path
+    redirect_to root_path
   end
 
   def show
@@ -43,11 +43,11 @@ class SongsController < ApplicationController
     @song = Song.find(params[:id])
     @song.update_attributes(song_params)
 
-		
-		nouns = @song.nouns.split
-		adjectives = @song.adjectives.split
-		people = @song.people.split
-		verbs = @song.verbs.split
+
+    nouns = @song.nouns.split
+    adjectives = @song.adjectives.split
+    people = @song.people.split
+    verbs = @song.verbs.split
 
     @song.swapper(@song.lyrics, "#{ENV["nouns"]}".split, nouns) 
     @song.swapper(@song.lyrics, "#{ENV["adjectives"]}".split, adjectives) 
